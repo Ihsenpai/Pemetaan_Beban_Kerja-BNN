@@ -1,0 +1,1412 @@
+<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 min-h-screen">
+    <div class="bg-gradient-to-b from-blue-600 to-blue-800 py-12 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <a href="{{ route($userRole . '.dashboard') }}" class="text-white hover:text-blue-200 mr-4 transition duration-300 ease-in-out transform hover:scale-110">
+                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-white text-blue-600">
+                        <span class="font-bold">←</span>
+                    </div>
+                </a>
+                <h2 class="text-2xl font-bold text-white">Form Program P4GN</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <!-- Form Container -->
+        <div class="bg-white shadow-2xl rounded-xl overflow-hidden transition-all duration-300 hover:shadow-blue-200/20">
+            <!-- Form Header -->
+            <div class="bg-gradient-to-r from-blue-700 to-blue-600 text-white p-8 text-center">
+                <h1 class="text-3xl font-bold mb-3">Pemetaan Beban Kerja Pegawai</h1>
+                <h2 class="text-xl">BNN Kabupaten Cilacap</h2>
+                <h3 class="text-lg mt-3 font-light">Program P4GN</h3>
+            </div>
+            
+            <!-- Form Content -->
+            <div class="p-6">
+                <!-- Personal Information -->
+                <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 px-2">
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-sm transition duration-300 hover:shadow-md">
+                        <label class="block text-blue-800 font-semibold mb-3 text-lg">Nama Pegawai</label>
+                        <div class="bg-white p-4 rounded-lg border border-blue-100 shadow-inner">{{ $userName }}</div>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-sm transition duration-300 hover:shadow-md">
+                        <label class="block text-blue-800 font-semibold mb-3 text-lg">Jabatan</label>
+                        <div class="bg-white p-4 rounded-lg border border-blue-100 shadow-inner">{{ $jabatan }}</div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-blue-100 pt-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center">PEMETAAN BEBAN KERJA</h3>
+                    <p class="mb-8 text-gray-600 text-center max-w-3xl mx-auto">Silahkan isi formulir berikut sesuai dengan yang dilakukan baik pada bidang masing-masing ataupun pekerjaan yang dikerjakan pada bidang lain</p>
+                </div>
+
+                <!-- Bidang Pencegahan -->
+                <div class="mb-8 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-blue-100">
+                    <button wire:click="toggleSection('bidang_pencegahan')" class="w-full flex justify-between items-center bg-gradient-to-r from-blue-700 to-blue-600 text-white p-5 focus:outline-none group">
+                        <span class="font-bold text-lg flex items-center">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center mr-3 shadow-sm">I</span>
+                            BIDANG PENCEGAHAN
+                        </span>
+                        <div class="w-6 h-6 flex items-center justify-center transform {{ $openSections['bidang_pencegahan'] ? 'rotate-180' : '' }} transition-transform duration-500 ease-in-out group-hover:text-blue-200">
+                            <span class="text-white text-lg">▼</span>
+                        </div>
+                    </button>
+                    
+                    @if($openSections['bidang_pencegahan'])
+                    <div class="p-8 bg-gradient-to-b from-blue-50 to-white transition-all duration-500 ease-in-out">
+                        
+                        <!-- Meningkatnya Daya Tangkal Anak dan Remaja -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">1. Meningkatnya Daya Tangkal Anak dan Remaja, Kegiatan: Pembentukan Remaja Teman Sebaya (RTS)</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_anak_remaja_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_anak_remaja.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Meningkatnya Daya Tangkal Keluarga -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">2. Meningkatnya Daya Tangkal Keluarga, Kegiatan: Fasilitasi Pendidikan Anti Narkoba pada Keluarga</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_administrasi" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="meningkatnya_daya_tangkal_keluarga_operasional" wire:model="formData.kegiatan.meningkatnya_daya_tangkal_keluarga.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kampanye P4GN melalui media elektronik -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">3. Kampanye P4GN melalui media elektronik</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_elektronik.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_elektronik.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_elektronik.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_elektronik.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_elektronik.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kampanye P4GN melalui media luar ruang -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">4. Kampanye P4GN melalui media luar ruang</h4>
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-white-700 mb-4 flex items-center">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_luar_ruang.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_luar_ruang.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_luar_ruang.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_luar_ruang.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kampanye_p4gn_luar_ruang.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Koordinasi Stakeholder Bidang Pencegahan -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">5. Koordinasi Stakeholder Bidang Pencegahan</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.koordinasi_stakeholder.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.koordinasi_stakeholder.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.koordinasi_stakeholder.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.koordinasi_stakeholder.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.koordinasi_stakeholder.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Rangkaian Peringatan HANI -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">6. Rangkaian Peringatan HANI</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.rangkaian_hani.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.rangkaian_hani.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.rangkaian_hani.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.rangkaian_hani.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.rangkaian_hani.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Penyuluhan Tatap Muka -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">7. Penyuluhan Tatap Muka</h4>
+
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.penyuluhan_tatap_muka.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.penyuluhan_tatap_muka.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.penyuluhan_tatap_muka.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.penyuluhan_tatap_muka.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.penyuluhan_tatap_muka.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pembentukan Desa Bersinar -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">8. Pembentukan Desa Bersinar</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.pembentukan_desa_bersinar.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.pembentukan_desa_bersinar.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.pembentukan_desa_bersinar.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.pembentukan_desa_bersinar.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.pembentukan_desa_bersinar.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kegiatan menjadi Inspektur Upacara -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">9. Kegiatan menjadi Inspektur Upacara</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.inspektur_upacara.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.inspektur_upacara.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.inspektur_upacara.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.inspektur_upacara.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.inspektur_upacara.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kegiatan Car Free Day -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">10. Kegiatan Car Free Day Cilacap</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.car_free_day.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.car_free_day.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.car_free_day.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.car_free_day.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.car_free_day.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kegiatan Informasi Edukasi (KIE) keliling -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">11. Kegiatan Informasi Edukasi (KIE) keliling</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kie_keliling.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kie_keliling.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kie_keliling.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kie_keliling.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" wire:model="formData.kegiatan.kie_keliling.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                
+                <!-- Bidang Pemberdayaan -->
+                <div class="mb-8 overflow-hidden shadow-md rounded-xl border border-blue-100">
+                    <button wire:click="toggleSection('bidang_pemberdayaan')" class="w-full flex justify-between items-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white p-5 focus:outline-none transition-all duration-300">
+                        <span class="font-bold text-lg flex items-center">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center mr-3 shadow-sm">II</span>
+                            BIDANG PEMBERDAYAAN MASYARAKAT
+                        </span>
+                        <div class="w-6 h-6 flex items-center justify-center transform {{ $openSections['bidang_pemberdayaan'] ? 'rotate-180' : '' }} transition-transform duration-300">
+                            <span class="text-white text-lg">▼</span>
+                        </div>
+                    </button>
+                    
+                    @if($openSections['bidang_pemberdayaan'])
+                    <div class="p-6 bg-gradient-to-b from-blue-50 to-white">
+                        <!-- Bimbingan Teknis Penggiat P4GN -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">1. Bimbingan Teknis Penggiat P4GN</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_operasional" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_operasional" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_operasional" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_operasional" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_penggiat_operasional" wire:model="formData.kegiatan.bimbingan_teknis_penggiat.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Rapat Koordinasi Pengembangan dan Pembinaan -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">2. Rapat Koordinasi Pengembangan dan Pembinaan Kota/Kabupaten Tanggapan Ancaman Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_administrasi" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_administrasi" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_administrasi" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_administrasi" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_administrasi" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_operasional" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_operasional" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_operasional" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_operasional" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_koordinasi_pengembangan_operasional" wire:model="formData.kegiatan.rapat_koordinasi_pengembangan.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Asistensi Kota/Kabupaten -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">3. Asistensi Kota/Kabupaten Tanggapan Ancaman Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_administrasi" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_administrasi" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_administrasi" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_administrasi" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_administrasi" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_operasional" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_operasional" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_operasional" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_operasional" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="asistensi_kota_kabupaten_operasional" wire:model="formData.kegiatan.asistensi_kota_kabupaten.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Konsolidasi Kebijakan -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">4. Konsolidasi Kebijakan Kota/Kabupaten Tanggapan Ancaman Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_administrasi" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_administrasi" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_administrasi" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_administrasi" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_administrasi" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_operasional" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_operasional" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_operasional" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_operasional" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="konsolidasi_kebijakan_operasional" wire:model="formData.kegiatan.konsolidasi_kebijakan.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Monitoring dan Evaluasi Program -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">5. Monitoring dan Evaluasi Pelaksanaan Program Pemberdayaan Masyarakat</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pengumpulan data indeks -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">6. Pengumpulan data indeks Kota/Kabupaten Tanggap Ancaman Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_administrasi" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_administrasi" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_administrasi" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_administrasi" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_administrasi" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_operasional" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_operasional" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_operasional" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_operasional" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pengumpulan_data_indeks_operasional" wire:model="formData.kegiatan.pengumpulan_data_indeks.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pemetaan Potensi SDM dan SDA -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">7. Pemetaan Potensi SDM dan SDA pada Kawasan Rawan Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_administrasi" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_administrasi" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_administrasi" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_administrasi" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_administrasi" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_operasional" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_operasional" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_operasional" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_operasional" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemetaan_potensi_sdm_sda_operasional" wire:model="formData.kegiatan.pemetaan_potensi_sdm_sda.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Rapat kerja dalam rangka sinergi -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">8. Rapat kerja dalam rangka sinergi Program Pemberdayaan Alternatif dengan Stakeholder</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_administrasi" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_administrasi" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_administrasi" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_administrasi" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_administrasi" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_operasional" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_operasional" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_operasional" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_operasional" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="rapat_kerja_sinergi_operasional" wire:model="formData.kegiatan.rapat_kerja_sinergi.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bimbingan teknis Lifeskill -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">9. Bimbingan teknis Lifeskill bagi masyarakat Kawasan Rawan Narkoba di Kabupaten/Kota</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_administrasi" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_operasional" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_operasional" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_operasional" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_operasional" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_lifeskill_operasional" wire:model="formData.kegiatan.bimbingan_teknis_lifeskill.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Monitoring dan Evaluasi Program Pemberdayaan Alternatif -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">10. Monitoring dan Evaluasi Program Pemberdayaan Alternatif pada Kawasan Rawan Narkoba</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Intensitas Administrasi:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_administrasi" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_administrasi" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_administrasi" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_administrasi" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_administrasi" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_administrasi" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <h5 class="font-medium text-blue-700 mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Intensitas Operasional:
+                                    </h5>
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_operasional" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_operasional" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_operasional" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_operasional" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="monitoring_evaluasi_program_alternatif_operasional" wire:model="formData.kegiatan.monitoring_evaluasi_program_alternatif.intensitas_operasional" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pemberdayaan masyarakat Anti Narkoba melalui Tes Urine -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">11. Pemberdayaan masyarakat Anti Narkoba melalui Tes Urine</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemberdayaan_tes_urine_intensitas" wire:model="formData.kegiatan.pemberdayaan_tes_urine.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemberdayaan_tes_urine_intensitas" wire:model="formData.kegiatan.pemberdayaan_tes_urine.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemberdayaan_tes_urine_intensitas" wire:model="formData.kegiatan.pemberdayaan_tes_urine.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemberdayaan_tes_urine_intensitas" wire:model="formData.kegiatan.pemberdayaan_tes_urine.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="pemberdayaan_tes_urine_intensitas" wire:model="formData.kegiatan.pemberdayaan_tes_urine.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Audiensi dengan Stakeholder -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">12. Audiensi dengan Stakeholder dalam rangka pemetaan Program Pemberdayaan Masyarakat</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="audiensi_stakeholder_intensitas" wire:model="formData.kegiatan.audiensi_stakeholder.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="audiensi_stakeholder_intensitas" wire:model="formData.kegiatan.audiensi_stakeholder.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="audiensi_stakeholder_intensitas" wire:model="formData.kegiatan.audiensi_stakeholder.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="audiensi_stakeholder_intensitas" wire:model="formData.kegiatan.audiensi_stakeholder.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="audiensi_stakeholder_intensitas" wire:model="formData.kegiatan.audiensi_stakeholder.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bimbingan Teknis Penggiat P4GN (Swadaya) -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">13. Bimbingan Teknis Penggiat P4GN (Swadaya)</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_swadaya_intensitas" wire:model="formData.kegiatan.bimbingan_teknis_swadaya.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_swadaya_intensitas" wire:model="formData.kegiatan.bimbingan_teknis_swadaya.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_swadaya_intensitas" wire:model="formData.kegiatan.bimbingan_teknis_swadaya.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_swadaya_intensitas" wire:model="formData.kegiatan.bimbingan_teknis_swadaya.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="bimbingan_teknis_swadaya_intensitas" wire:model="formData.kegiatan.bimbingan_teknis_swadaya.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sosialisasi P4GN -->
+                        <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
+                            <h4 class="text-blue-800 font-semibold mb-4 text-lg">14. Sosialisasi P4GN (Safari Jum' at, Safari Minggu, atau Sosialisasi di lingkungan Masyarakat, Pendidikan, Swasta, dan Pemerintah)</h4>
+                            
+                            <div class="grid grid-cols-1 gap-8 mt-6">
+                                <div class="bg-blue-50 p-5 rounded-lg">
+                                    <div class="space-y-3">
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="sosialisasi_p4gn_intensitas" wire:model="formData.kegiatan.sosialisasi_p4gn.intensitas" value="tidak_pernah" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Tidak Pernah</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="sosialisasi_p4gn_intensitas" wire:model="formData.kegiatan.sosialisasi_p4gn.intensitas" value="sesekali" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sesekali (1-2 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="sosialisasi_p4gn_intensitas" wire:model="formData.kegiatan.sosialisasi_p4gn.intensitas" value="jarang" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Jarang (3-5 Kali dalam setahun)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="sosialisasi_p4gn_intensitas" wire:model="formData.kegiatan.sosialisasi_p4gn.intensitas" value="sering" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Sering (Hampir setiap bulan)</span>
+                                        </label>
+                                        <label class="flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-100">
+                                            <input type="radio" name="sosialisasi_p4gn_intensitas" wire:model="formData.kegiatan.sosialisasi_p4gn.intensitas" value="rutin" class="h-5 w-5 text-blue-600">
+                                            <span class="ml-2 font-medium">Rutin (Dilaksanakan setiap bulan)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                
+                <!-- Bidang Rehabilitasi -->
+                <div class="mb-8 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-blue-100">
+                    <button wire:click="toggleSection('bidang_rehabilitasi')" class="w-full flex justify-between items-center bg-gradient-to-r from-blue-700 to-blue-600 text-white p-5 focus:outline-none group">
+                        <span class="font-bold text-lg flex items-center">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center mr-3 shadow-sm">III</span>
+                            BIDANG REHABILITASI
+                        </span>
+                        <div class="w-6 h-6 flex items-center justify-center transform {{ $openSections['bidang_rehabilitasi'] ? 'rotate-180' : '' }} transition-transform duration-500 ease-in-out group-hover:text-blue-200">
+                            <span class="text-white text-lg">▼</span>
+                        </div>
+                    </button>
+                    
+                    @if($openSections['bidang_rehabilitasi'])
+                    <div class="p-8 bg-gradient-to-b from-blue-50 to-white transition-all duration-500 ease-in-out">
+                        <div class="py-4 text-center">
+                            <span class="text-gray-600 italic">Konten bidang rehabilitasi akan ditampilkan di sini</span>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                
+                <!-- Bidang Pemberantasan -->
+                <div class="mb-8 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-blue-100">
+                    <button wire:click="toggleSection('bidang_pemberantasan')" class="w-full flex justify-between items-center bg-gradient-to-r from-blue-700 to-blue-600 text-white p-5 focus:outline-none group">
+                        <span class="font-bold text-lg flex items-center">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-white text-blue-600 mr-3">
+                                <span class="font-bold">IV</span>
+                            </div>
+                            BIDANG PEMBERANTASAN
+                        </span>
+                        <div class="w-6 h-6 flex items-center justify-center transform {{ $openSections['bidang_pemberantasan'] ? 'rotate-180' : '' }} transition-transform duration-500 ease-in-out group-hover:text-blue-200">
+                            <span class="text-white text-lg">▼</span>
+                        </div>
+                    </button>
+                    
+                    @if($openSections['bidang_pemberantasan'])
+                    <div class="p-8 bg-gradient-to-b from-blue-50 to-white transition-all duration-500 ease-in-out">
+                        <div class="py-4 text-center">
+                            <span class="text-gray-600 italic">Konten bidang pemberantasan akan ditampilkan di sini</span>
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                
+                <!-- Kendala, Saran, dan Masukan -->
+                <div class="mb-10 bg-white p-8 rounded-xl shadow-lg mt-10 border-t-4 border-blue-600">
+                    <h4 class="font-semibold text-blue-800 mb-6 text-xl flex items-center">
+                        Kendala, Saran, dan Masukan Pelaksanaan Kegiatan
+                    </h4>
+                    <textarea wire:model="formData.kendala_saran" rows="5" class="w-full border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 rounded-lg shadow-inner p-4 bg-blue-50" placeholder="Tuliskan kendala, saran, dan masukan untuk pelaksanaan kegiatan..."></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="flex justify-center mt-10 mb-8">
+                    <button wire:click="saveForm" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium text-lg rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white text-blue-600 mr-2">
+                                <span class="font-bold">✓</span>
+                            </div>
+                            Simpan Form
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Success Message -->
+                @if (session()->has('message'))
+                <div class="mt-6 p-5 bg-gradient-to-r from-green-50 to-green-100 text-green-700 rounded-lg shadow-md border-l-4 border-green-500 flex items-center animate__animated animate__fadeIn">
+                    <div class="flex items-center justify-center w-6 h-6 rounded-full bg-green-500 text-white mr-3">
+                        <span class="font-bold">✓</span>
+                    </div>
+                    {{ session('message') }}
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>

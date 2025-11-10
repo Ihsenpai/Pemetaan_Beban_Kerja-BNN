@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Livewire\Auth;
+
+use App\Livewire\Actions\Logout;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+
+#[Layout('components.layouts.auth')]
+class VerifyEmail extends Component
+{
+    public function sendVerification(): void
+    {
+        // Redirect to appropriate dashboard since email verification isn't used
+        if (Auth::guard('admin')->check()) {
+            $this->redirect(route('admin.dashboard'), navigate: true);
+        } elseif (Auth::guard('pimpinan')->check()) {
+            $this->redirect(route('pimpinan.dashboard'), navigate: true);
+        } elseif (Auth::guard('pegawai')->check()) {
+            $this->redirect(route('pegawai.dashboard'), navigate: true);
+        } elseif (Auth::guard('katim')->check()) {
+            $this->redirect(route('katim.dashboard'), navigate: true);
+        } else {
+            $this->redirect(route('login'), navigate: true);
+        }
+    }
+
+    public function logout(Logout $logout): void
+    {
+        $logout();
+        $this->redirect(route('login'), navigate: true);
+    }
+    
+    public function render()
+    {
+        return view('livewire.auth.verify-email');
+    }
+}

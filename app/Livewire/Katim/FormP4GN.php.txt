@@ -1,0 +1,184 @@
+<?php
+
+namespace App\Livewire\Katim;
+
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use Livewire\Attributes\Layout;
+
+#[Layout('livewire.layouts.app')]
+class FormP4GN extends Component
+{
+    public $userName;
+    public $jabatan;
+    public $userRole;
+    public $isLoggedIn = false;
+    
+    // Collapsible sections state
+    public $openSections = [
+        'bidang_pencegahan' => false,
+        'bidang_pemberdayaan' => false,
+        'bidang_rehabilitasi' => false,
+        'bidang_pemberantasan' => false
+    ];
+    
+    // Form data
+    public $formData = [
+        'katim_bidang' => 'ya',
+        'kegiatan' => []
+    ];
+    
+    public function mount()
+    {
+        $this->checkAuth();
+        $this->initFormData();
+    }
+
+    private function checkAuth()
+    {
+        // Check if user is logged in with katim guard
+        if (Auth::guard('katim')->check()) {
+            $this->isLoggedIn = true;
+            $this->userName = Auth::guard('katim')->user()->name;
+            $this->jabatan = Auth::guard('katim')->user()->jabatan ?? 'Katim';
+            $this->userRole = 'katim';
+        } else {
+            // Redirect if not authenticated as katim
+            return redirect()->route('login');
+        }
+    }
+    
+    private function initFormData()
+    {
+        // Initialize kegiatan with default values
+        $this->formData['kegiatan'] = [
+            // Bidang Pencegahan
+            'meningkatnya_daya_tangkal_anak_remaja' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'meningkatnya_daya_tangkal_keluarga' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'kampanye_p4gn_elektronik' => [
+                'intensitas' => null,
+            ],
+            'kampanye_p4gn_luar_ruang' => [
+                'intensitas' => null,
+            ],
+            'koordinasi_stakeholder' => [
+                'intensitas' => null,
+            ],
+            'rangkaian_hani' => [
+                'intensitas' => null,
+            ],
+            'penyuluhan_tatap_muka' => [
+                'intensitas' => null,
+            ],
+            'pembentukan_desa_bersinar' => [
+                'intensitas' => null,
+            ],
+            'inspektur_upacara' => [
+                'intensitas' => null,
+            ],
+            'car_free_day' => [
+                'intensitas' => null,
+            ],
+            'kie_keliling' => [
+                'intensitas' => null,
+            ],
+            
+            // Bidang Pemberdayaan
+            'katim_bidang' => null,
+            'bimbingan_teknis_penggiat' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'rapat_koordinasi_pengembangan' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'asistensi_kota_kabupaten' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'konsolidasi_kebijakan' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'monitoring_evaluasi_program' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'pengumpulan_data_indeks' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'pemetaan_potensi_sdm_sda' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'rapat_kerja_sinergi' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'bimbingan_teknis_lifeskill' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'monitoring_evaluasi_program_alternatif' => [
+                'intensitas_administrasi' => null,
+                'intensitas_operasional' => null,
+            ],
+            'pemberdayaan_tes_urine' => [
+                'intensitas' => null,
+            ],
+            'audiensi_stakeholder' => [
+                'intensitas' => null,
+            ],
+            'bimbingan_teknis_swadaya' => [
+                'intensitas' => null,
+            ],
+            'sosialisasi_p4gn' => [
+                'intensitas' => null,
+            ],
+            
+            // Bidang Rehabilitasi
+            // ... tambahkan kegiatan lainnya sesuai kebutuhan
+            
+            // Bidang Pemberantasan
+            // ... tambahkan kegiatan lainnya sesuai kebutuhan
+        ];
+        
+        // Set kendala dan saran
+        $this->formData['kendala_saran'] = '';
+    }
+    
+    public function toggleSection($section)
+    {
+        $this->openSections[$section] = !$this->openSections[$section];
+    }
+    
+    public function saveForm()
+    {
+        // Validasi form
+        $this->validate([
+            'formData.kendala_saran' => 'nullable|string|max:1000',
+        ]);
+        
+        // Simpan data form
+        // ... kode untuk menyimpan data form ke database
+        
+        // Flash message
+        session()->flash('message', 'Form berhasil disimpan!');
+        
+        // Redirect ke dashboard
+        return redirect()->route('katim.dashboard');
+    }
+
+    public function render()
+    {
+        return view('livewire.katim.form-p4gn');
+    }
+}

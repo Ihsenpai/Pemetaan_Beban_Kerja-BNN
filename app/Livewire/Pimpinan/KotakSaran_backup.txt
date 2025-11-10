@@ -1,0 +1,209 @@
+<?php
+
+namespace App\Livewire\Pimpinan;
+
+use App\Models\KotakSaran as KotakSaranModel;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Carbon\Carbon;
+
+#[Layout('livewire.layouts.app')]
+class KotakSaran extends Component
+{
+    use WithPagination;
+
+    public $searchTerm = '';
+    public $filterType = 'all'; // 'all', 'p4gn', 'dukungan'
+    public $sortBy = 'created_at';
+    public $sortDirection = 'desc';
+
+    public function updatingSearchTerm()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingFilterType()
+    {
+        $this->resetPage();
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortBy === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $field;
+            $this->sortDirection = 'asc';
+        }
+        $this->resetPage();
+    }
+
+    public function getSaranData()
+    {
+        $saranData = collect();
+
+        // Ambil saran dari P4GN Forms
+        if ($this->filterType === 'all' || $this->filterType === 'p4gn') {
+            $p4gnSaran = P4gnForm::with('pegawai')
+                ->whereNotNull('catatan')
+                ->where('catatan', '!=', '')
+                ->when($this->searchTerm, function ($query) {
+                    $query->where('catatan', 'like', '%' . $this->searchTerm . '%')
+                          ->orWhereHas('pegawai', function ($q) {
+                              $q->where('name', 'like', '%' . $this->searchTerm . '%');
+                          });
+                })
+                ->get()
+                ->map(function ($form) {
+                    return [
+                        'id' => $form->id,
+                        'type' => 'P4GN',
+                        'pegawai_name' => $form->pegawai->name ?? 'Unknown',
+                        'pegawai_nip' => $form->pegawai->nip ?? 'Unknown',
+                        'saran' => $form->catatan,
+                        'created_at' => $form->created_at,
+                        'updated_at' => $form->updated_at,
+                    ];
+                });
+
+            $saranData = $saranData->concat($p4gnSaran);
+        }
+
+        // Ambil saran dari Dukungan Forms
+        if ($this->filterType === 'all' || $this->filterType === 'dukungan') {
+            $dukunganSaran = DukunganForm::with('pegawai')
+                ->whereNotNull('catatan')
+                ->where('catatan', '!=', '')
+                ->when($this->searchTerm, function ($query) {
+                    $query->where('catatan', 'like', '%' . $this->searchTerm . '%')
+                          ->orWhereHas('pegawai', function ($q) {
+                              $q->where('name', 'like', '%' . $this->searchTerm . '%');
+                          });
+                })
+                ->get()
+                ->map(function ($form) {
+                    return [
+                        'id' => $form->id,
+                        'type' => 'Dukungan',
+                        'pegawai_name' => $form->pegawai->name ?? 'Unknown',
+                        'pegawai_nip' => $form->pegawai->nip ?? 'Unknown',
+                        'saran' => $form->catatan,
+                        'created_at' => $form->created_at,
+                        'updated_at' => $form->updated_at,
+                    ];
+                });
+
+            $saranData = $saranData->concat($dukunganSaran);
+
+            // Ambil saran ZI dari Dukungan Forms
+            $ziSaran = DukunganForm::with('pegawai')
+                ->whereNotNull('zi_kendala_saran')
+                ->where('zi_kendala_saran', '!=', '')
+                ->when($this->searchTerm, function ($query) {
+                    $query->where('zi_kendala_saran', 'like', '%' . $this->searchTerm . '%')
+                          ->orWhereHas('pegawai', function ($q) {
+                              $q->where('name', 'like', '%' . $this->searchTerm . '%');
+                          });
+                })
+                ->get()
+                ->map(function ($form) {
+                    return [
+                        'id' => $form->id . '_zi',
+                        'type' => 'Pembangunan ZI',
+                        'pegawai_name' => $form->pegawai->name ?? 'Unknown',
+                        'pegawai_nip' => $form->pegawai->nip ?? 'Unknown',
+                        'saran' => $form->zi_kendala_saran,
+                        'created_at' => $form->created_at,
+                        'updated_at' => $form->updated_at,
+                    ];
+                });
+
+            $saranData = $saranData->concat($ziSaran);
+        }
+
+        // Sort data
+        if ($this->sortBy === 'created_at') {
+            $saranData = $this->sortDirection === 'desc' 
+                ? $saranData->sortByDesc('created_at') 
+                : $saranData->sortBy('created_at');
+        } elseif ($this->sortBy === 'pegawai_name') {
+            $saranData = $this->sortDirection === 'desc' 
+                ? $saranData->sortByDesc('pegawai_name') 
+                : $saranData->sortBy('pegawai_name');
+        }
+
+        return $saranData->values();
+    }
+
+    public function getStatistics()
+    {
+        $totalP4gnSaran = P4gnForm::whereNotNull('catatan')
+            ->where('catatan', '!=', '')
+            ->count();
+
+        $totalDukunganSaran = DukunganForm::whereNotNull('catatan')
+            ->where('catatan', '!=', '')
+            ->count();
+
+        $totalZiSaran = DukunganForm::whereNotNull('zi_kendala_saran')
+            ->where('zi_kendala_saran', '!=', '')
+            ->count();
+
+        $totalSaran = $totalP4gnSaran + $totalDukunganSaran + $totalZiSaran;
+
+        $saranBulanIni = collect()
+            ->concat(P4gnForm::whereNotNull('catatan')
+                ->where('catatan', '!=', '')
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->get())
+            ->concat(DukunganForm::whereNotNull('catatan')
+                ->where('catatan', '!=', '')
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->get())
+            ->concat(DukunganForm::whereNotNull('zi_kendala_saran')
+                ->where('zi_kendala_saran', '!=', '')
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->get())
+            ->count();
+
+        return [
+            'total_saran' => $totalSaran,
+            'total_p4gn_saran' => $totalP4gnSaran,
+            'total_dukungan_saran' => $totalDukunganSaran,
+            'total_zi_saran' => $totalZiSaran,
+            'saran_bulan_ini' => $saranBulanIni,
+        ];
+    }
+
+    public function render()
+    {
+        $saranData = $this->getSaranData();
+        $statistics = $this->getStatistics();
+        
+        // Manual pagination
+        $perPage = 10;
+        $currentPage = $this->getPage();
+        $total = $saranData->count();
+        $items = $saranData->slice(($currentPage - 1) * $perPage, $perPage);
+
+        // Create pagination info
+        $paginationData = [
+            'current_page' => $currentPage,
+            'per_page' => $perPage,
+            'total' => $total,
+            'last_page' => ceil($total / $perPage),
+            'from' => ($currentPage - 1) * $perPage + 1,
+            'to' => min($currentPage * $perPage, $total),
+        ];
+
+        return view('livewire.pimpinan.kotak-saran', [
+            'saranData' => $items,
+            'statistics' => $statistics,
+            'pagination' => $paginationData,
+        ]);
+    }
+}
