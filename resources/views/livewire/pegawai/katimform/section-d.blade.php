@@ -95,18 +95,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Feedback Section -->
-    <div class="mb-8 bg-white p-5 rounded-xl shadow-sm border border-blue-100">
-        <h4 class="text-blue-800 font-semibold mb-4 text-lg text-left">15. Catatan dan Umpan Balik (Berikan komentar atau umpan balik tambahan)</h4>
-        
-        <div class="grid grid-cols-1 gap-8 mt-6">
-            <div class="bg-blue-50 p-5 rounded-lg">
-                <textarea wire:model="formData.evaluasi.catatan" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Berikan catatan atau umpan balik untuk Ketua Tim..."></textarea>
-            </div>
-        </div>
-    </div>
-        </div>
-    </div>
     @endif
 </div>

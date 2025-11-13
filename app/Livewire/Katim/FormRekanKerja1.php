@@ -19,6 +19,7 @@ class FormRekanKerja1 extends Component
     public $isLoggedIn = false;
     public $selectedPegawai = '';
     public $availablePegawai = [];
+    public $evaluationStatus = []; // Track evaluation status for each pegawai
     
     // Add listener for property updates
     protected $listeners = [
@@ -35,6 +36,7 @@ class FormRekanKerja1 extends Component
     {
         $this->checkAuth();
         $this->initFormData();
+        $this->loadEvaluationStatus();
         $this->loadAvailablePegawai();
     }
 
@@ -55,9 +57,13 @@ class FormRekanKerja1 extends Component
         $allUsers = Pegawai::where('name', '!=', $this->userName)->get(['nip', 'name']);
         
         $this->availablePegawai = $allUsers->map(function($user) {
+            $hasEvaluation = isset($this->evaluationStatus[$user->nip]);
             return [
                 'id' => $user->nip,
-                'name' => $user->name
+                'nip' => $user->nip,
+                'name' => $user->name,
+                'evaluated' => $hasEvaluation,
+                'status' => $hasEvaluation ? $this->evaluationStatus[$user->nip] : null
             ];
         })->toArray();
         
@@ -94,6 +100,10 @@ class FormRekanKerja1 extends Component
     
     public function updatedSelectedPegawai($value)
     {
+        // Load existing evaluation if exists
+        if ($value) {
+            $this->loadExistingEvaluation($value);
+        }
         // This method will automatically be called when selectedPegawai is updated
         // Force a refresh to ensure the UI updates
         $this->dispatch('refresh');
@@ -221,7 +231,64 @@ class FormRekanKerja1 extends Component
 
         session()->flash('message', 'Evaluasi Rekan Kerja 1 berhasil disimpan!');
         
+        // Reload evaluation status after save
+        $this->loadEvaluationStatus();
+        
         return redirect()->route($this->userRole . '.dashboard');
+    }
+
+    private function loadEvaluationStatus()
+    {
+        $currentKatimNip = Auth::guard('katim')->user()->nip;
+        
+        // Get all evaluations by current katim
+        $evaluations = RekanKerja1Evaluation::where('katim_nip', $currentKatimNip)->get();
+        
+        $this->evaluationStatus = [];
+        foreach ($evaluations as $evaluation) {
+            $this->evaluationStatus[$evaluation->pegawai_nip] = [
+                'status' => 'completed',
+                'date' => $evaluation->updated_at->format('d M Y'),
+                'total_score' => $evaluation->total_keseluruhan
+            ];
+        }
+    }
+
+    private function loadExistingEvaluation($pegawaiId)
+    {
+        $currentKatimNip = Auth::guard('katim')->user()->nip;
+        
+        // Find pegawai by ID to get NIP
+        $pegawai = collect($this->availablePegawai)->firstWhere('id', $pegawaiId);
+        if (!$pegawai) return;
+        
+        // Check if evaluation exists
+        $evaluation = RekanKerja1Evaluation::where('katim_nip', $currentKatimNip)
+                                          ->where('pegawai_nip', $pegawai['nip'])
+                                          ->first();
+        
+        if ($evaluation) {
+            // Load existing data into form
+            $this->formData['evaluasi'] = [
+                'kualitas_kerja' => $evaluation->kualitas_kerja,
+                'kuantitas_kerja' => $evaluation->kuantitas_kerja,
+                'ketepatan_waktu' => $evaluation->ketepatan_waktu,
+                'kemandirian' => $evaluation->kemandirian,
+                'komitmen_kerja' => $evaluation->komitmen_kerja,
+                'kemampuan_kerjasama' => $evaluation->kemampuan_kerjasama,
+                'kemampuan_komunikasi' => $evaluation->kemampuan_komunikasi,
+                'kepemimpinan' => $evaluation->kepemimpinan,
+                'integritas' => $evaluation->integritas,
+                'kreativitas' => $evaluation->kreativitas,
+                'disiplin' => $evaluation->disiplin,
+                'catatan' => $evaluation->catatan ?? '',
+            ];
+            
+            session()->flash('info', 'Data evaluasi yang sudah ada berhasil dimuat. Anda dapat mengeditnya.');
+        } else {
+            // Reset form for new evaluation
+            $this->initFormData();
+        }
     }
 
     public function render()

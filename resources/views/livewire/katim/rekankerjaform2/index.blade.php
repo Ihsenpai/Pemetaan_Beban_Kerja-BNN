@@ -98,15 +98,6 @@
                     </div>
                 </div>
 
-                <!-- Kotak Saran Anonymous -->
-                <div class="mt-8 mb-8">
-                    @include('components.kotak-saran', [
-                        'formType' => 'rekan_kerja_2',
-                        'title' => 'Saran untuk Perbaikan Evaluasi Rekan Kerja 2',
-                        'placeholder' => 'Berikan saran Anda untuk perbaikan sistem evaluasi rekan kerja di luar tim...'
-                    ])
-                </div>
-
                 <div class="flex justify-center space-x-4 mt-8">
                     <button type="button" onclick="window.history.back()" 
                             class="px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500">
@@ -118,6 +109,15 @@
                     </button>
                 </div>
             </form>
+
+            <!-- Kotak Saran Anonymous - MOVED OUTSIDE FORM -->
+            <div class="mt-8">
+                @include('components.kotak-saran', [
+                    'formType' => 'rekan_kerja_2',
+                    'title' => 'Saran untuk Perbaikan Evaluasi Rekan Kerja 2',
+                    'placeholder' => 'Berikan saran Anda untuk perbaikan sistem evaluasi rekan kerja di luar tim...'
+                ])
+            </div>
         </div>
     </div>
 </div>
