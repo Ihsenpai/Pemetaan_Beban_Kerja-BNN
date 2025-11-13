@@ -45,4 +45,10 @@ class RekanKerja2Evaluation extends Model
         // Total score maksimal = 5 + 4 = 9
         return ($this->ketertiban ?? 0) + ($this->efektivitas ?? 0);
     }
+
+    // Relationship ke evaluator (Katim yang menilai)
+    public function evaluator()
+    {
+        return $this->belongsTo(Katim::class, 'katim_nip', 'nip');
+    }
 }

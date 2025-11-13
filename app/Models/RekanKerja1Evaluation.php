@@ -37,4 +37,10 @@ class RekanKerja1Evaluation extends Model
     {
         return $this->belongsTo(Pegawai::class, 'pegawai_nip', 'nip');
     }
+
+    // Relationship ke evaluator (Katim yang menilai)
+    public function evaluator()
+    {
+        return $this->belongsTo(Katim::class, 'katim_nip', 'nip');
+    }
 }

@@ -24,9 +24,20 @@ Route::get('/', function() {
 Route::get('/login', \App\Livewire\Auth\Login::class)->middleware('guest')->name('login');
 
 // Admin routes with admin guard
-Route::get('/admin/dashboard', \App\Livewire\Admin\Dashboard::class)
-    ->middleware('auth:admin')
-    ->name('admin.dashboard');
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', \App\Livewire\Admin\Dashboard::class)
+        ->name('admin.dashboard');
+    Route::get('/admin/pegawai', \App\Livewire\Admin\PegawaiManagement::class)
+        ->name('admin.pegawai');
+    Route::get('/admin/katim', \App\Livewire\Admin\KatimManagement::class)
+        ->name('admin.katim');
+    Route::get('/admin/kotak-saran', \App\Livewire\Pimpinan\KotakSaran::class)
+        ->name('admin.kotak-saran');
+    Route::get('/admin/form-management', \App\Livewire\Admin\FormManagement::class)
+        ->name('admin.form-management');
+    Route::get('/admin/monitoring', \App\Livewire\Admin\UserMonitoring::class)
+        ->name('admin.monitoring');
+});
 
 // Pimpinan dashboard - with pimpinan guard
 Route::middleware(['auth:pimpinan'])->group(function () {
@@ -37,7 +48,7 @@ Route::middleware(['auth:pimpinan'])->group(function () {
     Route::get('/pimpinan/pegawai/{nip}', \App\Livewire\Pimpinan\PegawaiDetail::class)
         ->name('pimpinan.pegawai.detail');
     Route::get('/pimpinan/kotak-saran', \App\Livewire\Pimpinan\KotakSaran::class)
-        ->name('pimpinan.kotak.saran');
+        ->name('pimpinan.kotak-saran');
 });
 
 // Pegawai routes - with pegawai guard
