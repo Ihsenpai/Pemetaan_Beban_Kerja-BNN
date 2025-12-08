@@ -224,8 +224,7 @@
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.jenis_pegawai') border-red-500 @enderror"
                                     >
                                         <option value="PNS">PNS</option>
-                                        <option value="PPPK">PPPK</option>
-                                        <option value="Kontrak">Kontrak</option>
+                                        <option value="PPPK">PPNPN</option>
                                     </select>
                                     @error('form.jenis_pegawai')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

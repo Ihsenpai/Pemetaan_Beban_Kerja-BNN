@@ -31,6 +31,8 @@ Route::middleware(['auth:admin'])->group(function () {
         ->name('admin.pegawai');
     Route::get('/admin/katim', \App\Livewire\Admin\KatimManagement::class)
         ->name('admin.katim');
+    Route::get('/admin/pimpinan', \App\Livewire\Admin\PimpinanManagement::class)
+        ->name('admin.pimpinan');
     Route::get('/admin/kotak-saran', \App\Livewire\Pimpinan\KotakSaran::class)
         ->name('admin.kotak-saran');
     Route::get('/admin/form-management', \App\Livewire\Admin\FormManagement::class)

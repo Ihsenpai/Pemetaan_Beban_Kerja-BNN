@@ -21,7 +21,7 @@
         <!-- Quick Actions -->
         <div class="mb-8">
             <h2 class="text-xl font-semibold text-white mb-4">Manajemen Data</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <a href="{{ route('admin.pegawai') }}" class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -50,6 +50,22 @@
                         <div class="ml-4">
                             <h3 class="text-lg font-medium text-gray-900">Kelola Katim</h3>
                             <p class="text-sm text-gray-500">CRUD Data Ketua Tim</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="{{ route('admin.pimpinan') }}" class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100">
+                                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Kelola Pimpinan</h3>
+                            <p class="text-sm text-gray-500">CRUD Data Pimpinan</p>
                         </div>
                     </div>
                 </a>
