@@ -133,23 +133,35 @@ class Dashboard extends Component
     {
         $performers = [];
         
-        // Get top P4GN performers
-        $topP4gn = P4gnForm::with('pegawai')
+        // Get top P4GN performers - ensure pegawai relationship is loaded
+        $topP4gn = P4gnForm::with(['pegawai' => function($query) {
+                $query->select('nip', 'name', 'email');
+            }])
             ->where('periode_penilaian', $period)
+            ->whereNotNull('total_keseluruhan')
+            ->whereHas('pegawai') // Only get forms where pegawai exists
             ->orderBy('total_keseluruhan', 'desc')
             ->take(5)
             ->get();
 
-        // Get top Dukungan performers  
-        $topDukungan = DukunganForm::with('pegawai')
+        // Get top Dukungan performers - ensure pegawai relationship is loaded
+        $topDukungan = DukunganForm::with(['pegawai' => function($query) {
+                $query->select('nip', 'name', 'email');
+            }])
             ->where('periode_penilaian', $period)
+            ->whereNotNull('total_keseluruhan')
+            ->whereHas('pegawai') // Only get forms where pegawai exists
             ->orderBy('total_keseluruhan', 'desc')
             ->take(5)
             ->get();
 
         // Get top Katim performers - calculate average score from all evaluations
-        $katimAverages = KatimEvaluation::with('katim')
+        $katimAverages = KatimEvaluation::with(['katim' => function($query) {
+                $query->select('id', 'name', 'nip', 'email');
+            }])
             ->where('periode', $period)
+            ->whereNotNull('total_keseluruhan')
+            ->whereHas('katim') // Only get evaluations where katim exists
             ->get()
             ->groupBy('katim_id')
             ->map(function ($evaluations) {

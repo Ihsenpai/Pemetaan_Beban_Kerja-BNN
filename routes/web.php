@@ -50,7 +50,7 @@ Route::middleware(['auth:pimpinan'])->group(function () {
     Route::get('/pimpinan/pegawai/{nip}', \App\Livewire\Pimpinan\PegawaiDetail::class)
         ->name('pimpinan.pegawai.detail');
     Route::get('/pimpinan/kotak-saran', \App\Livewire\Pimpinan\KotakSaran::class)
-        ->name('pimpinan.kotak-saran');
+        ->name('pimpinan.kotak.saran');
 });
 
 // Pegawai routes - with pegawai guard
