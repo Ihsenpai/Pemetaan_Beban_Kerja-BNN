@@ -214,31 +214,58 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                         Penilaian Katim
+                        @if($katimData['exists'])
+                            <span class="ml-2 text-sm font-normal text-gray-500">({{ $katimData['totalEvaluations'] }} penilaian)</span>
+                        @endif
                     </h3>
 
                     @if($katimData['exists'])
-                        @foreach($katimData['data'] as $section => $skor)
-                            <div class="mb-4">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm font-medium text-gray-700">{{ $section }}</span>
-                                    <span class="text-sm font-semibold text-gray-900">{{ $skor ?? 0 }}/25</span>
-                                </div>
-                                <div class="w-full bg-gray-300 rounded-full h-6 overflow-hidden shadow-inner">
-                                    @php
-                                        $percentage = $skor === null ? 0 : ($skor / 25) * 100;
-                                        $width = min($percentage, 100);
-                                    @endphp
-                                    <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 h-6 rounded-full transition-all duration-1000 ease-out progress-bar"
-                                         data-width="{{ $width }}">
+                        <div class="space-y-4">
+                            <!-- Average Score Display -->
+                            @if($katimData['totalEvaluations'] > 1)
+                                <div class="text-center p-3 bg-indigo-50 rounded-lg mb-4">
+                                    <div class="text-sm text-indigo-600 font-medium">
+                                        Nilai rata-rata dari {{ $katimData['totalEvaluations'] }} penilaian
                                     </div>
                                 </div>
+                            @endif
+
+                            @foreach($katimData['data'] as $section => $skor)
+                                <div class="mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-medium text-gray-700">{{ $section }}</span>
+                                        <span class="text-sm font-semibold text-gray-900">{{ $skor ?? 0 }}/25</span>
+                                    </div>
+                                    <div class="w-full bg-gray-300 rounded-full h-6 overflow-hidden shadow-inner">
+                                        @php
+                                            $percentage = $skor === null ? 0 : ($skor / 25) * 100;
+                                            $width = min($percentage, 100);
+                                        @endphp
+                                        <div class="bg-gradient-to-r from-indigo-400 to-indigo-600 h-6 rounded-full transition-all duration-1000 ease-out progress-bar"
+                                             data-width="{{ $width }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            
+                            <div class="mt-6 pt-4 border-t border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-semibold text-gray-900">Total Rata-rata</span>
+                                    <span class="text-2xl font-bold text-indigo-600">{{ $katimData['total'] }}</span>
+                                </div>
                             </div>
-                        @endforeach
-                        
-                        <div class="mt-6 pt-4 border-t border-gray-200">
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-semibold text-gray-900">Total</span>
-                                <span class="text-2xl font-bold text-indigo-600">{{ $katimData['total'] }}</span>
+
+                            <!-- List of Evaluators -->
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Dinilai oleh:</h4>
+                                <div class="space-y-1">
+                                    @foreach($katimData['evaluations'] as $eval)
+                                        <div class="text-xs text-gray-600 flex justify-between">
+                                            <span>{{ $eval->pegawai->name ?? 'Unknown Evaluator' }}</span>
+                                            <span>{{ $eval->total_keseluruhan }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     @else

@@ -20,6 +20,7 @@ class KatimManagement extends Component
     public $isEdit = false;
     public $katimToDelete = null;
     public $showPasswordField = false;
+    public $selectedPegawaiNip = ''; // For selecting pegawai to copy data from
 
     // Form properties using form object
     public $form = [
@@ -37,7 +38,7 @@ class KatimManagement extends Component
         'form.name' => 'required|string|max:255',
         'form.email' => 'required|email|max:255',
         'form.jabatan' => 'required|string|max:255',
-        'form.jenis_pegawai' => 'required|in:PNS,PPPK,Kontrak',
+        'form.jenis_pegawai' => 'required|in:PNS,PPNPN,PPPK,Kontrak',
         'form.password' => 'nullable|min:6',
     ];
 
@@ -51,6 +52,31 @@ class KatimManagement extends Component
         $this->resetForm();
         $this->isEdit = false;
         $this->showModal = true;
+    }
+
+    public function updatedSelectedPegawaiNip($nip)
+    {
+        if ($nip && $nip !== '') {
+            $pegawai = Pegawai::where('nip', $nip)->first();
+            
+            if ($pegawai) {
+                // Auto-fill form with pegawai data, except jabatan (will be filled manually)
+                $this->form['nip'] = $pegawai->nip;
+                $this->form['name'] = $pegawai->name;
+                $this->form['email'] = $pegawai->email;
+                $this->form['jenis_pegawai'] = $pegawai->jenis_pegawai;
+                // Don't fill jabatan - it will be filled manually by admin for katim position
+                
+                // Clear any existing errors for these fields
+                $this->resetErrorBag(['form.nip', 'form.name', 'form.email', 'form.jenis_pegawai']);
+            }
+        } else {
+            // If deselected, clear the form
+            $this->form['nip'] = '';
+            $this->form['name'] = '';
+            $this->form['email'] = '';
+            $this->form['jenis_pegawai'] = 'PNS';
+        }
     }
 
     public function edit($id)
@@ -89,6 +115,7 @@ class KatimManagement extends Component
             'password' => '',
             'is_active' => true,
         ];
+        $this->selectedPegawaiNip = '';
         $this->showPasswordField = false;
         $this->resetErrorBag();
     }
@@ -172,8 +199,12 @@ class KatimManagement extends Component
         ->orderBy('name')
         ->paginate(10);
 
+        // Get all pegawai for dropdown selection
+        $allPegawai = Pegawai::orderBy('name')->get();
+
         return view('livewire.admin.katim-management', [
-            'katims' => $katims
+            'katims' => $katims,
+            'allPegawai' => $allPegawai
         ]);
     }
 }

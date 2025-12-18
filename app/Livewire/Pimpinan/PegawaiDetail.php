@@ -118,33 +118,44 @@ class PegawaiDetail extends Component
             return null;
         }
 
-        // Get the latest katim evaluation for this period
-        $katimEvaluation = KatimEvaluation::where('katim_id', $katim->id)
+        // Get all katim evaluations for this period (not just the latest)
+        $katimEvaluations = KatimEvaluation::where('katim_id', $katim->id)
             ->where('periode', $currentPeriod)
-            ->latest()
-            ->first();
+            ->with('pegawai') // Load the evaluators
+            ->get();
 
-        if (!$katimEvaluation) {
+        if ($katimEvaluations->isEmpty()) {
             return [
                 'exists' => false,
                 'katim' => $katim,
                 'data' => [],
                 'total' => 0,
-                'tanggal' => null
+                'tanggal' => null,
+                'totalEvaluations' => 0,
+                'evaluations' => collect()
             ];
         }
+
+        // Calculate averages for each section
+        $avgSectionA = round($katimEvaluations->avg('total_section_a'), 2);
+        $avgSectionB = round($katimEvaluations->avg('total_section_b'), 2);
+        $avgSectionC = round($katimEvaluations->avg('total_section_c'), 2);
+        $avgSectionD = round($katimEvaluations->avg('total_section_d'), 2);
+        $avgTotal = round($katimEvaluations->avg('total_keseluruhan'), 2);
 
         return [
             'exists' => true,
             'katim' => $katim,
             'data' => [
-                'Section A' => $katimEvaluation->total_section_a,
-                'Section B' => $katimEvaluation->total_section_b,
-                'Section C' => $katimEvaluation->total_section_c,
-                'Section D' => $katimEvaluation->total_section_d,
+                'Section A' => $avgSectionA,
+                'Section B' => $avgSectionB,
+                'Section C' => $avgSectionC,
+                'Section D' => $avgSectionD,
             ],
-            'total' => $katimEvaluation->total_keseluruhan,
-            'tanggal' => $katimEvaluation->created_at
+            'total' => $avgTotal,
+            'tanggal' => $katimEvaluations->first()->created_at,
+            'totalEvaluations' => $katimEvaluations->count(),
+            'evaluations' => $katimEvaluations
         ];
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
                 'dukungan', 
                 'rekan_kerja_1', 
                 'rekan_kerja_2'
-            ]); // Jenis form asal (anonymous)
+            ]); // Jenis form asal (anonymous )
             $table->enum('status', ['pending', 'reviewed'])->default('pending');
             $table->timestamps();
             

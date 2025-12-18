@@ -159,13 +159,51 @@
 
                         <form wire:submit.prevent="save">
                             <div class="space-y-4">
+                                <!-- Pilih Pegawai (hanya saat create) -->
+                                @if(!$isEdit)
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <label for="selectedPegawai" class="block text-sm font-medium text-blue-900 mb-2">
+                                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            Pilih dari Data Pegawai (Opsional)
+                                        </label>
+                                        <select 
+                                            id="selectedPegawai"
+                                            wire:model.live="selectedPegawaiNip" 
+                                            class="block w-full border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        >
+                                            <option value="">-- Pilih Pegawai atau Isi Manual --</option>
+                                            @foreach($allPegawai as $pegawai)
+                                                <option value="{{ $pegawai->nip }}">
+                                                    {{ $pegawai->name }} ({{ $pegawai->nip }}) - {{ $pegawai->jabatan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <p class="mt-2 text-xs text-blue-600">
+                                            💡 Pilih pegawai untuk auto-fill data, atau isi manual di bawah. Data tetap bisa diedit setelah dipilih.
+                                        </p>
+                                        @if($selectedPegawaiNip)
+                                            <div class="mt-2 p-2 bg-green-50 border border-green-200 rounded">
+                                                <p class="text-xs text-green-700 flex items-center">
+                                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                    Data pegawai berhasil dimuat! Form di bawah telah terisi otomatis.
+                                                </p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
+
                                 <!-- NIP -->
-                                <div>
+                                <div wire:key="nip-field-{{ $selectedPegawaiNip }}">
                                     <label for="nip" class="block text-sm font-medium text-gray-700">NIP</label>
                                     <input 
                                         type="text" 
                                         id="nip"
-                                        wire:model="form.nip" 
+                                        wire:model.live="form.nip"
+                                        value="{{ $form['nip'] }}"
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.nip') border-red-500 @enderror"
                                         placeholder="Masukkan NIP"
                                     >
@@ -175,12 +213,13 @@
                                 </div>
 
                                 <!-- Nama -->
-                                <div>
+                                <div wire:key="name-field-{{ $selectedPegawaiNip }}">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                                     <input 
                                         type="text" 
                                         id="name"
-                                        wire:model="form.name" 
+                                        wire:model.live="form.name"
+                                        value="{{ $form['name'] }}"
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.nama') border-red-500 @enderror"
                                         placeholder="Masukkan nama lengkap"
                                     >
@@ -190,12 +229,13 @@
                                 </div>
 
                                 <!-- Email -->
-                                <div>
+                                <div wire:key="email-field-{{ $selectedPegawaiNip }}">
                                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                                     <input 
                                         type="email" 
                                         id="email"
-                                        wire:model="form.email" 
+                                        wire:model.live="form.email"
+                                        value="{{ $form['email'] }}"
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.email') border-red-500 @enderror"
                                         placeholder="Masukkan email"
                                     >
@@ -204,32 +244,36 @@
                                     @enderror
                                 </div>
 
-                                <!-- Jabatan -->
+                                <!-- Jabatan Katim -->
                                 <div>
-                                    <label for="jabatan" class="block text-sm font-medium text-gray-700">Jabatan</label>
+                                    <label for="jabatan" class="block text-sm font-medium text-gray-700">
+                                        Jabatan Ketua Tim <span class="text-red-500">*</span>
+                                    </label>
                                     <input 
                                         type="text" 
                                         id="jabatan"
                                         wire:model="form.jabatan" 
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.jabatan') border-red-500 @enderror"
-                                        placeholder="Masukkan jabatan"
+                                        placeholder="Contoh: Ketua Tim P4GN, Ketua Tim Rehabilitasi, dll"
                                     >
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        Isi jabatan sebagai Ketua Tim (misal: Ketua Tim P4GN)
+                                    </p>
                                     @error('form.jabatan')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Jenis Pegawai -->
-                                <div>
+                                <div wire:key="jenis-pegawai-field-{{ $selectedPegawaiNip }}">
                                     <label for="jenis_pegawai" class="block text-sm font-medium text-gray-700">Jenis Pegawai</label>
                                     <select 
                                         id="jenis_pegawai"
-                                        wire:model="form.jenis_pegawai" 
+                                        wire:model.live="form.jenis_pegawai" 
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('form.jenis_pegawai') border-red-500 @enderror"
                                     >
-                                        <option value="PNS">PNS</option>
-                                        <option value="PPPK">PPPK</option>
-                                        <option value="Kontrak">Kontrak</option>
+                                        <option value="PNS" {{ $form['jenis_pegawai'] == 'PNS' ? 'selected' : '' }}>PNS</option>
+                                        <option value="PPNPN" {{ $form['jenis_pegawai'] == 'PPNPN' ? 'selected' : '' }}>PPNPN</option>
                                     </select>
                                     @error('form.jenis_pegawai')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
